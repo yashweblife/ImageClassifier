@@ -76,22 +76,153 @@ export function getSetMag(a: Vector, b: number): Vector {
   }
   return [a[0] * mag, a[1] * mag, a[2] * mag];
 }
-export function rotateX(a: Vector, b: number) {}
-export function getRotateX(a: Vector, b: number) {}
-export function rotateXAlong(a: Vector, b: Vector, c: number) {}
-export function getRotateXAlong(a: Vector, b: Vector, c: number) {}
+export function rotateX(a: Vector, b: number) {
+  let sin = Math.sin(b);
+  let cos = Math.cos(b);
+  let y = a[1];
+  let z = a[2];
+  a[1] = y * cos - z * sin;
+  a[2] = y * sin + z * cos;
+}
+export function getRotateX(a: Vector, b: number) {
+  let sin = Math.sin(b);
+  let cos = Math.cos(b);
+  let y = a[1];
+  let z = a[2];
+  return [a[0], y * cos - z * sin, y * sin + z * cos];
+}
+export function rotateXAlong(a: Vector, b: Vector, c: number) {
+  let p = [],
+    r = [];
+  //Translate point to the origin
+  p[0] = a[0] - b[0];
+  p[1] = a[1] - b[1];
+  p[2] = a[2] - b[2];
 
-export function rotateY(a: Vector, b: number) {}
-export function getRotateY(a: Vector, b: number) {}
-export function rotateYAlong(a: Vector, b: Vector, c: number) {}
-export function getRotateYAlong(a: Vector, b: Vector, c: number) {}
+  //perform rotation
+  r[0] = p[0];
+  r[1] = p[1] * Math.cos(c) - p[2] * Math.sin(c);
+  r[2] = p[1] * Math.sin(c) + p[2] * Math.cos(c);
 
-export function rotateZ(a: Vector, b: number) {}
-export function getRotateZ(a: Vector, b: number) {}
-export function rotateZAlong(a: Vector, b: Vector, c: number) {}
-export function getRotateZAlong(a: Vector, b: Vector, c: number) {}
+  //translate to correct position
+  a[0] = r[0] + b[0];
+  a[1] = r[1] + b[1];
+  a[2] = r[2] + b[2];
+}
+export function getRotateXAlong(a: Vector, b: Vector, c: number) {
+  let p = [],
+    r = [];
+  //Translate point to the origin
+  p[0] = a[0] - b[0];
+  p[1] = a[1] - b[1];
+  p[2] = a[2] - b[2];
 
+  //perform rotation
+  r[0] = p[0];
+  r[1] = p[1] * Math.cos(c) - p[2] * Math.sin(c);
+  r[2] = p[1] * Math.sin(c) + p[2] * Math.cos(c);
+
+  //translate to correct position
+  return [a[0], r[0] + b[0], r[1] + b[1], r[2] + b[2]];
+}
+export function rotateY(a: Vector, b: number) {
+  let sin = Math.sin(b);
+  let cos = Math.cos(b);
+  let x = a[0];
+  let z = a[2];
+  a[0] = z * sin + x * cos;
+  a[2] = z * cos - x * sin;
+}
+export function getRotateY(a: Vector, b: number) {
+  let sin = Math.sin(b);
+  let cos = Math.cos(b);
+  let x = a[0];
+  let z = a[2];
+  return [z * sin + x * cos, a[1], z * cos - x * sin];
+}
+export function rotateYAlong(a: Vector, b: Vector, c: number) {
+  let p = [],
+    r = [];
+  //Translate point to the origin
+  p[0] = a[0] - b[0];
+  p[1] = a[1] - b[1];
+  p[2] = a[2] - b[2];
+
+  //perform rotation
+  r[0] = p[2] * Math.sin(c) + p[0] * Math.cos(c);
+  r[1] = p[1];
+  r[2] = p[2] * Math.cos(c) - p[0] * Math.sin(c);
+
+  //translate to correct position
+  a[0] = r[0] + b[0];
+  a[1] = r[1] + b[1];
+  a[2] = r[2] + b[2];
+}
+export function getRotateYAlong(a: Vector, b: Vector, c: number) {
+  let p = [],
+    r = [];
+  //Translate point to the origin
+  p[0] = a[0] - b[0];
+  p[1] = a[1] - b[1];
+  p[2] = a[2] - b[2];
+
+  //perform rotation
+  r[0] = p[2] * Math.sin(c) + p[0] * Math.cos(c);
+  r[1] = p[1];
+  r[2] = p[2] * Math.cos(c) - p[0] * Math.sin(c);
+
+  //translate to correct position
+  return [r[0] + b[0], r[1] + b[1], r[2] + b[2]];
+}
+export function rotateZ(a: Vector, b: number) {
+  let sin = Math.sin(b);
+  let cos = Math.cos(b);
+  let x = a[0];
+  let y = a[1];
+  a[0] = x * cos - y * sin;
+  a[1] = x * sin + y * cos;
+}
+export function getRotateZ(a: Vector, b: number) {
+  let sin = Math.sin(b);
+  let cos = Math.cos(b);
+  let x = a[0];
+  let y = a[1];
+  return [x * cos - y * sin, x * sin + y * cos, a[2]];
+}
+export function rotateZAlong(a: Vector, b: Vector, c: number) {
+  let p = [],
+    r = [];
+  //Translate point to the origin
+  p[0] = a[0] - b[0];
+  p[1] = a[1] - b[1];
+  p[2] = a[2] - b[2];
+
+  //perform rotation
+  r[0] = p[0] * Math.cos(c) - p[1] * Math.sin(c);
+  r[1] = p[0] * Math.sin(c) + p[1] * Math.cos(c);
+  r[2] = p[2];
+  a[0] = r[0] + b[0];
+  a[1] = r[1] + b[1];
+  a[2] = r[2] + b[2];
+}
+export function getRotateZAlong(a: Vector, b: Vector, c: number) {
+  let p = [],
+    r = [];
+  //Translate point to the origin
+  p[0] = a[0] - b[0];
+  p[1] = a[1] - b[1];
+  p[2] = a[2] - b[2];
+
+  //perform rotation
+  r[0] = p[0] * Math.cos(c) - p[1] * Math.sin(c);
+  r[1] = p[0] * Math.sin(c) + p[1] * Math.cos(c);
+  r[2] = p[2];
+
+  //translate to correct position
+  return [r[0] + b[0], r[1] + b[1], r[2] + b[2]];
+}
 export function rotate(a: Vector, b: number) {}
 export function getRotate(a: Vector, b: number) {}
 export function rotateAlong(a: Vector, b: Vector, c: number) {}
 export function getRotateAlong(a: Vector, b: Vector, c: number) {}
+export function getCenter(a: Vector, b: Vector) {}
