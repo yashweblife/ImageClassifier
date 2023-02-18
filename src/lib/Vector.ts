@@ -76,7 +76,17 @@ export function getSetMag(a: Vector, b: number): Vector {
   }
   return [a[0] * mag, a[1] * mag, a[2] * mag];
 }
-export function rotateX(a:Vector,b:number){
-
-}
+export function rotateX(a:Vector,b:number){}
+export function getRotateX(a:Vector, b:number){}
 export function rotateXAlong(a:Vector,b:Vector,c:number){}
+export function getRotateXAlong(a:Vector,b:Vector,c:number){}
+
+export function rotateY(a:Vector,b:number){}
+export function getRotateY(a:Vector, b:number){}
+export function rotateYAlong(a:Vector,b:Vector,c:number){}
+export function getRotateYAlong(a:Vector,b:Vector,c:number){}
+
+export function rotateZ(a:Vector,b:number){}
+export function getRotateZ(a:Vector, b:number){}
+export function rotateZAlong(a:Vector,b:Vector,c:number){}
+export function getRotateZAlong(a:Vector,b:Vector,c:number){}
