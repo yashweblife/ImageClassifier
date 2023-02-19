@@ -225,4 +225,28 @@ export function rotate(a: Vector, b: number) {}
 export function getRotate(a: Vector, b: number) {}
 export function rotateAlong(a: Vector, b: Vector, c: number) {}
 export function getRotateAlong(a: Vector, b: Vector, c: number) {}
-export function getCenter(a: Vector, b: Vector) {}
+export function getCenter(a: Vector, b: Vector) {
+  return [(b[0] - a[0]) / 2, (b[1] - a[1]) / 2, (b[2] - a[2]) / 2];
+}
+export function getSmallestComponent(a: Vector) {
+  return Math.min(Math.min(a[0], a[1]), a[2]);
+}
+export function getLargestComponent(a: Vector) {
+  return Math.max(Math.max(a[0], a[1]), a[2]);
+}
+export function random(a: Vector, b: number) {
+  b = b === undefined ? 1.0 : b;
+  let r = (Math.random() - 0.5) * 2 * Math.PI;
+  let z = (Math.random() - 0.5) * 2 - 1.0;
+  let zScale = Math.sqrt(1 - z * z) * b;
+  a[0] = Math.cos(r) * zScale;
+  a[1] = Math.sin(r) * zScale;
+  a[2] = z * zScale;
+}
+export function getRandom(a: number) {
+  a = a === undefined ? 1.0 : a;
+  let r = (Math.random() - 0.5) * 2 * Math.PI;
+  let z = (Math.random() - 0.5) * 2 - 1.0;
+  let zScale = Math.sqrt(1 - z * z) * a;
+  return [Math.cos(r) * zScale, Math.sin(r) * zScale, z * zScale];
+}
