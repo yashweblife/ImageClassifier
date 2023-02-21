@@ -27,22 +27,30 @@ function maxRGB(data: Vector) {
 function minRGB(data: Vector) {
   let minColor = Math.min(Math.min(data[0], data[1]), data[2]);
   let threshold = 10;
-  data[0] =  data[0]-minColor < threshold ? 255 : 0;
-  data[1] =  data[1]-minColor < threshold ? 255 : 0;
-  data[2] =  data[2]-minColor < threshold ? 255 : 0;
+  data[0] = data[0] - minColor < threshold ? 255 : 0;
+  data[1] = data[1] - minColor < threshold ? 255 : 0;
+  data[2] = data[2] - minColor < threshold ? 255 : 0;
 }
-function greyScale(data:Vector){
-    let maxColor = Math.max(Math.max(data[0], data[1]), data[2]);
-    data[0] = maxColor;
-    data[1] = maxColor;
-    data[2] = maxColor;
+function greyScale(data: Vector) {
+  let maxColor = Math.max(Math.max(data[0], data[1]), data[2]);
+  data[0] = maxColor;
+  data[1] = maxColor;
+  data[2] = maxColor;
 }
-function animate() {
-  canvas.drawImage(cam.dom);
-  const data = canvas.convertImageTo2D(canvas.getImageData());
-  canvas.draw2d(data, greyScale);
-  requestAnimationFrame(animate);
+// var mode = 0;
+// function animate() {
+
+  // }
+  
+  function animate(){
+    // for(let i=0;i<10;i++){
+    // }
+      canvas.drawImage(cam.dom);
+      canvas.getImageAs2D();
+      canvas.drawImageMatrix();
+      requestAnimationFrame(animate);
 }
+
 cam.onPlay(() => {
   animate();
 });
