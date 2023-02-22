@@ -17,7 +17,7 @@ export class Canvas {
   constructor(parent: HTMLElement = document.body) {
     parent.append(this.dom);
     this.setSize(400, 400);
-    this.setResolution(4);
+    this.setResolution(2);
     this.createImageMatrix();
   }
   /**
