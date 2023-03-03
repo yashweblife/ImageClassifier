@@ -37,20 +37,23 @@ function greyScale(data: Vector) {
   data[1] = maxColor;
   data[2] = maxColor;
 }
-// var mode = 0;
-// function animate() {
-
-  // }
+canvas.setResolution(10)
   
-  function animate(){
-    // for(let i=0;i<10;i++){
-    // }
-      canvas.drawImage(cam.dom);
-      canvas.getImageAs2D();
-      canvas.drawImageMatrix();
-      requestAnimationFrame(animate);
+function animate(){
+  canvas.drawImage(cam.dom);
+  canvas.getImageAs2D();
+  canvas.drawImageMatrix();
+  requestAnimationFrame(animate);
 }
 
 cam.onPlay(() => {
   animate();
 });
+const range = document.querySelector('#slider') as HTMLInputElement
+const reverse = document.querySelector("#reverse") as HTMLButtonElement
+range.addEventListener("input",()=>{
+  canvas.setThreshold(Number(range.value))
+})
+reverse.addEventListener("click",()=>{
+  canvas.toggleReverse()
+})
