@@ -8,6 +8,11 @@ canvas.width=300;
 canvas.height=300;
 const c:CanvasRenderingContext2D = canvas.getContext('2d')!;
 
+const graph:HTMLCanvasElement = document.createElement("canvas");
+graph.width=300;
+graph.height=300;
+const g:CanvasRenderingContext2D = graph.getContext('2d')!;
+
 train_button.innerHTML = "TRAIN"
 video_button.innerHTML = "Start Camera"
 input_button.placeholder = "Enter A Name";
@@ -17,7 +22,8 @@ window.addEventListener("load",()=>{
     train_button,
     button_array,
     video_button,
-    canvas
+    canvas,
+    graph 
   )
 })
 video_button.addEventListener("click",()=>{
@@ -65,11 +71,27 @@ function get_image_matrix_clone(matrix:Float32Array){
   return(output);
 }
 
+function draw_bar(c:CanvasRenderingContext2D, pos:number, size:number, color:string){
+  c.beginPath();
+  c.fillStyle = color;
+  c.rect(pos, 0, 2, -size);
+  c.fill();
+  c.closePath();
+}
+
+function draw_bar_graph(c:CanvasRenderingContext2D,plot:Float32Array){
+  for(let i=0;i<plot.length;i++){
+    draw_bar(c, i*3, plot[i], "red");
+  }
+}
+
 const resolution = 100;
 const image_matrix = new Float32Array(resolution);
-
+g.translate(0, g.canvas.height)
 function animate(){
+  g.clearRect(- g.canvas.width, -g.canvas.height,g.canvas.width, g.canvas.height);
   set_video_to_canvas(video_element, c);
   set_image_matrix_values(100,c, image_matrix)
+  draw_bar_graph(g, image_matrix.map(val=>val*255));
   requestAnimationFrame(animate)
 }
