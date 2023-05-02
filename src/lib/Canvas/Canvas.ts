@@ -10,15 +10,23 @@ export class Canvas {
   public darkestPoint: Vector = [0, 0, 0];
   public imageMatrix: Vector[][] = [];
   public greyScale: boolean = true;
+  public threshold:number = 60;
   public boundingBox: number[][] = [
     [0, 0],
     [500, 500],
   ];
+  public reverse: any;
   constructor(parent: HTMLElement = document.body) {
     parent.append(this.dom);
     this.setSize(400, 400);
     this.setResolution(2);
     this.createImageMatrix();
+  }
+  public setThreshold = (val:number)=>{
+    this.threshold = val;
+  }
+  public toggleReverse = ()=>{
+    this.reverse = !this.reverse
   }
   /**
    * Set the size of the canvas
@@ -99,7 +107,8 @@ export class Canvas {
         let test: Vector = [data[index + 0], data[index + 1], data[index + 2]];
         if (this.greyScale === true) {
           let val = getLargestComponent(test);
-          if (val < 60) {
+          let checker = (this.reverse) ? val < this.threshold : val > this.threshold;
+          if (checker) {
             val = 0;
           } else {
             val = 255;
