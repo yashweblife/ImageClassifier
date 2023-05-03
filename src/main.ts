@@ -55,6 +55,17 @@ function set_image_matrix_values(res:number=100, c:CanvasRenderingContext2D, mat
     index+=1;
   }
 }
+function set_matrix_values_to_image(res:number=100, c:CanvasRenderingContext2D, matrix:Float32Array[]){
+  const {data} = c.getImageData(0,0,c.canvas.width, c.canvas.height);
+  let index=  0;
+  for(let i=0;i<data.length-4; i+=data.length/res){
+    const calc = (data[i]+data[i+1]+data[i+2])/3
+    for(let i=0;i<matrix.length;i++){
+      matrix[i][index] = calc/255;
+    }
+    index+=1;
+  }
+}
 function get_image_matrix_average(matrix:Float32Array){
   let output = 0;
   for(let i=0;i<matrix.length;i++){
@@ -87,11 +98,14 @@ function draw_bar_graph(c:CanvasRenderingContext2D,plot:Float32Array){
 
 const resolution = 100;
 const image_matrix = new Float32Array(resolution);
+const red_image_matrix = new Float32Array(resolution);
+const green_image_matrix = new Float32Array(resolution);
+const blue_image_matrix = new Float32Array(resolution);
 g.translate(0, g.canvas.height)
 function animate(){
   g.clearRect(- g.canvas.width, -g.canvas.height,g.canvas.width, g.canvas.height);
   set_video_to_canvas(video_element, c);
-  set_image_matrix_values(100,c, image_matrix)
+  set_matrix_values_to_image(100,c, [image_matrix, red_image_matrix, green_image_matrix, blue_image_matrix])
   draw_bar_graph(g, image_matrix.map(val=>val*255));
   requestAnimationFrame(animate)
 }
