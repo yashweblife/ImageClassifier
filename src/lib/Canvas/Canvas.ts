@@ -1,6 +1,6 @@
 import { distance, getLargestComponent, make, Vector } from "../Vector";
 
-export class Canvas {
+export class Canvas1 {
   public dom: HTMLCanvasElement = document.createElement("canvas");
   public size: Vector = [400, 400, 0];
   public ctx: CanvasRenderingContext2D = this.dom.getContext("2d", {
@@ -220,4 +220,13 @@ export class Canvas {
     this.ctx.fill();
     this.ctx.closePath();
   };
+}
+
+export class Canvas{
+  private canvas = document.createElement('canvas')!;
+  public c:CanvasRenderingContext2D = this.canvas.getContext('2d')!;
+  constructor(parent:HTMLElement=document.body){
+    
+    parent.append(this.canvas);
+  }
 }
