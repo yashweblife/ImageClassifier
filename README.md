@@ -13,7 +13,7 @@ In a very primitive sense, an image classifier takes a look at an image and clas
 
 #### Misconception
 In our primitive model, what it doesn't do is object classification.
-It doesn't take a look at an entire image and to look for specific
+It doesn't take a look at an entire image and look for specific
 objects.
 We are also not using neural networks for this project currently.
 All we are doing is using the distance formula.
