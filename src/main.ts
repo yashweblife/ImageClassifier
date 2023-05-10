@@ -1,5 +1,11 @@
 class Matrix{
+    public components:Float32Array;
     constructor(public size:number=3){
+        this.components = new Float32Array(size);
+    }
+}
+class MatrixMath extends Matrix{
+    public static add(a:Matrix, b:Matrix){
         
     }
 }
@@ -10,6 +16,9 @@ class Canvas{
     constructor(parent:HTMLElement=document.body){}
 }
 
+class Camera{
+    constructor(){}
+}
 
 class Group{
     public values:any[] = []
