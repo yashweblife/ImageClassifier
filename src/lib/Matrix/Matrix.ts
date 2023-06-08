@@ -5,8 +5,8 @@ export class Matrix {
         this.length = size;
         this.components = new Float64Array(size);
     }
-    public set(val: Float64Array) {
-        this.components = val;
+    public set(val: number[]) {
+        this.components = new Float64Array(val);
     }
     public add(m: Matrix): Matrix {
         for (let i = 0; i < this.length; i++) {
