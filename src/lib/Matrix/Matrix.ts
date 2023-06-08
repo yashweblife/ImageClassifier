@@ -8,30 +8,56 @@ export class Matrix {
     public set(val: number[]) {
         this.components = new Float64Array(val);
     }
-    public add(m: Matrix): Matrix {
-        for (let i = 0; i < this.length; i++) {
-            this.components[i] += m.components[i]
+    public add(m: (Matrix|number[]|Float64Array)): Matrix {
+        if( m instanceof Matrix){
+            for (let i = 0; i < this.length; i++) {
+                this.components[i] += m.components[i]
+            }
+        }else{
+            for (let i = 0; i < this.length; i++) {
+                this.components[i] += m[i]
+            }
         }
         return (this)
     }
-    public sub(m: Matrix): Matrix {
-        for (let i = 0; i < this.length; i++) {
-            this.components[i] -= m.components[i]
+    public sub(m: (Matrix|number[]|Float64Array)): Matrix {
+        if( m instanceof Matrix){
+            for (let i = 0; i < this.length; i++) {
+                this.components[i] -= m.components[i]
+            }
+        }else{
+            for (let i = 0; i < this.length; i++) {
+                this.components[i] -= m[i]
+            }
         }
         return (this)
     }
-    public mul(m: Matrix): Matrix {
-        for (let i = 0; i < this.length; i++) {
-            this.components[i] *= m.components[i]
+    
+    public mul(m: (Matrix|number[]|Float64Array)): Matrix {
+        if( m instanceof Matrix){
+            for (let i = 0; i < this.length; i++) {
+                this.components[i] *= m.components[i]
+            }
+        }else{
+            for (let i = 0; i < this.length; i++) {
+                this.components[i] *= m[i]
+            }
         }
         return (this)
     }
-    public div(m: Matrix): Matrix {
-        for (let i = 0; i < this.length; i++) {
-            this.components[i] /= m.components[i]
+    public div(m: (Matrix|number[]|Float64Array)): Matrix {
+        if( m instanceof Matrix){
+            for (let i = 0; i < this.length; i++) {
+                this.components[i] *= m.components[i]
+            }
+        }else{
+            for (let i = 0; i < this.length; i++) {
+                this.components[i] *= m[i]
+            }
         }
         return (this)
     }
+    
     public normalize(m: number = 1): Matrix {
         let mag = 0;
         for (let i = 0; i < this.length; i++) {
