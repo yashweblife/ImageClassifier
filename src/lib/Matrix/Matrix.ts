@@ -1,9 +1,14 @@
 export class Matrix {
     public components: Float64Array;
     public length: number = 0;
-    constructor(size: number) {
-        this.length = size;
-        this.components = new Float64Array(size);
+    constructor(val: (number|number[])) {
+        if(typeof val == "number"){
+            this.length = val;
+            this.components = new Float64Array(val);
+        }else{
+            this.length = val.length;
+            this.components = new Float64Array(val);
+        }
     }
     public set(val: number[]) {
         this.components = new Float64Array(val);
@@ -77,5 +82,9 @@ export class Matrix {
 
         }
         return (output)
+    }
+    public log(){
+        const comp ="Values: ["+ this.components.join(", ")+"]" + "\nLength: " + this.length
+        console.log(comp)
     }
 }
