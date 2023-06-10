@@ -15,4 +15,22 @@ export class $ {
         this.dom.innerText = val;
         return this
     }
+    public setEvent(type:string, exec:any){
+        this.dom.addEventListener(type, exec);
+        return this
+    }
+    public setHTML(val:string){
+        this.dom.innerHTML = val;
+        return this
+    }
+    public setID(val:string){
+        this.dom.id = val;
+        return this
+    }
+    public setAttribute(key:string, val:string){
+        this.dom.setAttribute(key, val);
+        return this
+    }
+
+    
 }
