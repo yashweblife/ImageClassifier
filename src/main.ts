@@ -12,4 +12,50 @@ class Camera {
         return (this.video)
     }
 }
-
+class Vector {
+    public components: Float64Array;
+    public length: number = 0;
+    constructor(size: number = 3) {
+        this.components = new Float64Array(size);
+        this.length = size;
+    }
+    public set(value: Float64Array) {
+        this.components = value;
+        return (this);
+    }
+    public add(value: Vector) {
+        for (let i = 0; i < this.length; i++) {
+            this.components[i] += value.components[i];
+        }
+        return (this)
+    }
+    public mag() {
+        let output = 0;
+        for (let i = 0; i < this.length; i++) {
+            output += this.components[i] * this.components[i];
+        }
+        output = Math.sqrt(output);
+        return (output);
+    }
+    public sub(value: Vector) {
+        for (let i = 0; i < this.length; i++) {
+            this.components[i] -= value.components[i];
+        }
+        return (this)
+    }
+    public normalize(scale: number = 1) {
+        let magnitude = 0;
+        for (let i = 0; i < this.length; i++) {
+            magnitude = this.components[i] * this.components[i];
+        }
+        magnitude = Math.sqrt(magnitude);
+        for (let i = 0; i < this.length; i++) {
+            this.components[i] *= scale / magnitude;
+        }
+    }
+}
+class App {
+    public time: number = 0;
+    constructor() { }
+    public animate() { }
+}
