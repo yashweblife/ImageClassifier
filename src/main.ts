@@ -12,7 +12,7 @@ class Camera {
         return (this.video)
     }
 }
-class Vector {
+class Vector{
     public components: Float64Array;
     public length: number = 0;
     constructor(size: number = 3) {
@@ -29,19 +29,19 @@ class Vector {
         }
         return (this)
     }
-    public mag() {
+    public sub(value: Vector) {
+        for (let i = 0; i < this.length; i++) {
+            this.components[i] -= value.components[i];
+        }
+        return (this)
+    }
+    public getMag() {
         let output = 0;
         for (let i = 0; i < this.length; i++) {
             output += this.components[i] * this.components[i];
         }
         output = Math.sqrt(output);
         return (output);
-    }
-    public sub(value: Vector) {
-        for (let i = 0; i < this.length; i++) {
-            this.components[i] -= value.components[i];
-        }
-        return (this)
     }
     public normalize(scale: number = 1) {
         let magnitude = 0;
@@ -52,6 +52,7 @@ class Vector {
         for (let i = 0; i < this.length; i++) {
             this.components[i] *= scale / magnitude;
         }
+        return(this);
     }
 }
 class App {
