@@ -55,8 +55,23 @@ class Vector{
         return(this);
     }
 }
+
+class Classification{
+    public name:string="";
+    public data:Vector[]=[];
+    constructor(){}
+    public addData(){}
+}
+class Classifier{
+    public classes:Classification[]=[]
+    constructor(){}
+    public addData(){}
+}
 class App {
     public time: number = 0;
+    public classifier = new Classifier();
     constructor() { }
-    public animate() { }
+    public animate() { 
+
+    }
 }
