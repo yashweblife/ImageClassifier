@@ -1,15 +1,23 @@
 class Camera {
     public mediaStream: (MediaStream | null) = null;
     public video: HTMLVideoElement = document.createElement("video")
+    public canvas:HTMLCanvasElement = document.createElement("canvas");
+    public c:CanvasRenderingContext2D = this.canvas.getContext('2d')!;
     constructor() {
-        navigator.mediaDevices.getUserMedia({ video: true }).then((stream: MediaStream) => {
+        this.canvas.width=300;
+        this.canvas.height=300;
+        navigator.mediaDevices.getUserMedia({ video: {
+            width:300,
+            height:300
+        } }).then((stream: MediaStream) => {
             this.mediaStream = stream;
             this.video.srcObject = stream;
             this.video.play();
         })
     }
     public getVideo() {
-        return (this.video)
+        this.c.drawImage(this.video,0,0,300,300);
+        return(this.c.getImageData(0,0,300,300));
     }
 }
 class Vector{
@@ -70,8 +78,33 @@ class Classifier{
 class App {
     public time: number = 0;
     public classifier = new Classifier();
-    constructor() { }
-    public animate() { 
-
+    public cam:Camera = new Camera();
+    public currentImageData:Vector[] = new Array(216);
+    constructor() {
+        document.body.appendChild(this.cam.canvas)
+        for(let i=0;i<this.currentImageData.length;i++){
+            this.currentImageData[i] = new Vector(4);
+        }    
+    }
+    public makeSenseOfData({data}:ImageData){
+        let x = 0;
+        for(let i=0;i<data.length-4;i+= Math.floor(data.length/this.currentImageData.length)){
+            if(x<this.currentImageData.length){
+                this.currentImageData[x].components[0] = data[i]
+                this.currentImageData[x].components[1] = data[i+1]
+                this.currentImageData[x].components[2] = data[i+2]
+                this.currentImageData[x].components[3] = (data[i] + data[i+1] + data[i+2])/3
+                x+=1
+            }
+        }
+    }
+    public animate() {
+        this.makeSenseOfData(this.cam.getVideo());
     }
 }
+const a = new App();
+function anim(){
+    a.animate()
+    requestAnimationFrame(anim)
+}
+anim()
