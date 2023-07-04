@@ -62,6 +62,13 @@ class Vector{
         }
         return(this);
     }
+    public clone(){
+        const nVec = new Vector(this.length);
+        for(let i=0;i<this.length;i++){
+            nVec.components[i] = this.components[i];
+        }
+        return(nVec);
+    }
 }
 
 class Classification{
@@ -97,6 +104,9 @@ class App {
                 x+=1
             }
         }
+    }
+    public classify(name:string=""){
+
     }
     public animate() {
         this.makeSenseOfData(this.cam.getVideo());
