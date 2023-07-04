@@ -80,7 +80,9 @@ class Classification{
 class Classifier{
     public classes:Classification[]=[]
     constructor(){}
-    public addData(){}
+    public addClass(name:string, vec:Vector[]){
+        
+    }
 }
 class App {
     public time: number = 0;
@@ -105,8 +107,8 @@ class App {
             }
         }
     }
-    public classify(name:string=""){
-
+    public addClass(name:string=""){
+        this.classifier.addClass(name, this.currentImageData.map((val:Vector)=>val.clone()));
     }
     public animate() {
         this.makeSenseOfData(this.cam.getVideo());
