@@ -74,10 +74,20 @@ class Vector {
         }
         return (nVec);
     }
+    public distance(vec:Vector){
+        let output = 0;
+        for(let i=0;i<this.length;i++){
+            output += (this.components[i]-vec.components[i])**2
+        }
+        return(Math.sqrt(output));
+    }
 }
 
 class Classification {
-    constructor(public name: string = "", public data: Vector[][]) { }
+    public averageVector:Vector;
+    constructor(public name: string = "", public data: Vector[][]) {
+        this.averageVector = new Vector(data[0].length);
+    }
     public normalize() { }
     public getAverageVector() { }
     public addData(val: Vector[]) { }
@@ -85,7 +95,18 @@ class Classification {
 class Classifier {
     public classifications: Classification[] = []
     constructor() { }
-    classify(val: Vector[]) { }
+    classify(val: Vector) {
+        let checkDist = Infinity;
+        let output = undefined;
+        for(let i=0;i<this.classifications.length;i++){
+            this.classifications[i].getAverageVector();
+            const distance = this.classifications[i].averageVector.distance(val);
+            if(distance<checkDist){
+                checkDist=distance;
+                output = this.classifications[i]
+            }
+        }
+    }
     addClass(name: string = "", val: Vector[]) {
         if (this.classifications.length > 0) {
             for (let i = 0; i < this.classifications.length; i++) {
