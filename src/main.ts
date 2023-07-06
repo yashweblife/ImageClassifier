@@ -1,4 +1,4 @@
-class Camera {
+ class Camera {
     public mediaStream: (MediaStream | null) = null;
     public video: HTMLVideoElement = document.createElement("video")
     public canvas: HTMLCanvasElement = document.createElement("canvas");
@@ -15,6 +15,9 @@ class Camera {
             this.mediaStream = stream;
             this.video.srcObject = stream;
             this.video.play();
+        })
+        .catch((err:any)=>{
+            console.log(err)
         })
     }
     public getVideo() {
