@@ -74,17 +74,10 @@ class Vector {
 }
 
 class Classification {
-    public name: string = "";
-    public data: Vector[] = [];
-    constructor() { }
-    public addData() { }
+    constructor(public name:string="", public data:Vector[][]){}
 }
 class Classifier {
-    public classes: Classification[] = []
-    constructor() { }
-    public addClass(name: string, vec: Vector[]) {
 
-    }
 }
 class App {
     public time: number = 0;
