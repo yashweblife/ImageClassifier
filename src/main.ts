@@ -1,4 +1,4 @@
- class Camera {
+class Camera {
     public mediaStream: (MediaStream | null) = null;
     public video: HTMLVideoElement = document.createElement("video")
     public canvas: HTMLCanvasElement = document.createElement("canvas");
@@ -16,9 +16,9 @@
             this.video.srcObject = stream;
             this.video.play();
         })
-        .catch((err:any)=>{
-            console.log(err)
-        })
+            .catch((err: any) => {
+                console.log(err)
+            })
     }
     public getVideo() {
         this.c.drawImage(this.video, 0, 0, 300, 300);
@@ -77,10 +77,28 @@ class Vector {
 }
 
 class Classification {
-    constructor(public name:string="", public data:Vector[][]){}
+    constructor(public name: string = "", public data: Vector[][]) { }
+    public normalize() { }
+    public getAverageVector() { }
+    public addData(val: Vector[]) { }
 }
 class Classifier {
-
+    public classifications: Classification[] = []
+    constructor() { }
+    classify(val: Vector[]) { }
+    addClass(name: string = "", val: Vector[]) {
+        if (this.classifications.length > 0) {
+            for (let i = 0; i < this.classifications.length; i++) {
+                if (this.classifications[i].name == name) {
+                    this.classifications[i].addData(val)
+                    return;
+                }
+            }
+            this.classifications.push(new Classification(name, [val]));
+        } else {
+            this.classifications.push(new Classification(name, [val]));
+        }
+    }
 }
 class App {
     public time: number = 0;
