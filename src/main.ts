@@ -1,8 +1,8 @@
 class Camera {
     public mediaStream: (MediaStream | null) = null;
     public video: HTMLVideoElement = document.createElement("video")
-    public isVideoReady:boolean = false;
-    public image:HTMLImageElement;
+    public isVideoReady: boolean = false;
+    public image: HTMLImageElement;
     public canvas: HTMLCanvasElement = document.createElement("canvas");
     public c: CanvasRenderingContext2D = this.canvas.getContext('2d')!;
     constructor() {
@@ -18,17 +18,17 @@ class Camera {
             this.mediaStream = stream;
             this.video.srcObject = stream;
             this.video.play();
-            this.isVideoReady=true;
+            this.isVideoReady = true;
         })
-        .catch((err: any) => {
-            console.log(err);
-        })
+            .catch((err: any) => {
+                console.log(err);
+            })
     }
     public getVideo() {
-        if(this.isVideoReady){
+        if (this.isVideoReady) {
             this.c.drawImage(this.video, 0, 0, 300, 300);
-        }else{
-            this.c.drawImage(this.image,0,0,300,300);
+        } else {
+            this.c.drawImage(this.image, 0, 0, 300, 300);
         }
         return (this.c.getImageData(0, 0, 300, 300));
     }
@@ -97,32 +97,36 @@ class Vector {
     }
 }
 
-class VectorMath{
-    constructor(){}
-    public static add(v1:Vector, v2:Vector){
+class VectorMath {
+    constructor() { }
+    public static add(v1: Vector, v2: Vector) {
         const output = new Vector(v1.length);
-        for(let i=0;i<v1.length;i++){
-            output.components[i] = v1.components[i] + v2.components[i]; 
+        for (let i = 0; i < v1.length; i++) {
+            output.components[i] = v1.components[i] + v2.components[i];
         }
-        return(output);
+        return (output);
     }
-    public getAverage(vec:Vector[]){
+    public static getAverage(vec: Vector[]) {
         const output = new Vector(vec[0].length);
-        for(let i=0;i<vec.length;i++){
+        for (let i = 0; i < vec.length; i++) {
             output.add(vec[i]);
         }
-        output.mul(1/vec.length);
+        output.mul(1 / vec.length);
+        return (output)
     }
 }
 
 class Classification {
-    public averageVector: Vector;
+    public averageVector: Vector[] = [];
     constructor(public name: string = "", public data: Vector[][]) {
-        this.averageVector = new Vector(data[0].length);
     }
-    public normalize() { }
+    public normalize() {
+        for (let i = 0; i < this.data.length; i++) {
+
+        }
+    }
     public getAverageVector() {
-        for(let i=0;i<this.data.length;i++){
+        for (let i = 0; i < this.data.length; i++) {
 
         }
     }
@@ -194,7 +198,7 @@ class App {
 const a = new App();
 const trainButton = document.querySelector("#train") as HTMLButtonElement
 const nameInput = document.querySelector("#name") as HTMLInputElement
-trainButton.addEventListener("click",()=>{
+trainButton.addEventListener("click", () => {
     a.addClass(nameInput.value);
 })
 function anim() {
