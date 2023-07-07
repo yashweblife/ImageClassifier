@@ -56,6 +56,12 @@ class Vector {
         }
         return (this)
     }
+    public mul(value: number) {
+        for (let i = 0; i < this.length; i++) {
+            this.components[i] *= value;
+        }
+        return (this)
+    }
     public getMag() {
         let output = 0;
         for (let i = 0; i < this.length; i++) {
@@ -91,13 +97,35 @@ class Vector {
     }
 }
 
+class VectorMath{
+    constructor(){}
+    public static add(v1:Vector, v2:Vector){
+        const output = new Vector(v1.length);
+        for(let i=0;i<v1.length;i++){
+            output.components[i] = v1.components[i] + v2.components[i]; 
+        }
+        return(output);
+    }
+    public getAverage(vec:Vector[]){
+        const output = new Vector(vec[0].length);
+        for(let i=0;i<vec.length;i++){
+            output.add(vec[i]);
+        }
+        output.mul(1/vec.length);
+    }
+}
+
 class Classification {
     public averageVector: Vector;
     constructor(public name: string = "", public data: Vector[][]) {
         this.averageVector = new Vector(data[0].length);
     }
     public normalize() { }
-    public getAverageVector() { }
+    public getAverageVector() {
+        for(let i=0;i<this.data.length;i++){
+
+        }
+    }
     public addData(val: Vector[]) {
         this.data.push(val);
     }
