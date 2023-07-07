@@ -5,15 +5,24 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Classifier</title>
+    <style>
+      #example{
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <header>
       <h1>Image Classifier</h1>
     </header>
     <main>
+      <img src="./src/assets/poster08.png" id="example">
       <div id="canvas-card" class="card"></div>
-      <div id="visualizer-card" class="card"></div>
+      <div id="visualizer-card" class="card">
+        <input type="text" id="name">
+        <button id="train">Train</button>
+      </div>
     </main>
-    <script type="module" src="/src/main.ts"></script>
+    <script defer type="module" src="/src/main.ts"></script>
   </body>
 </html>
