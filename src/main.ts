@@ -125,8 +125,9 @@ class Classification {
 
         }
     }
-    public getAverageVector() {
+    public getAverage() {
         for (let i = 0; i < this.data.length; i++) {
+            console.log(this.data[i])
 
         }
     }
@@ -141,7 +142,7 @@ class Classifier {
         let checkDist = Infinity;
         let output = undefined;
         for (let i = 0; i < this.classifications.length; i++) {
-            this.classifications[i].getAverageVector();
+            this.classifications[i].getAverage();
             const distance = this.classifications[i].averageVector.distance(val);
             if (distance < checkDist) {
                 checkDist = distance;
@@ -161,7 +162,9 @@ class Classifier {
         } else {
             this.classifications.push(new Classification(name, [val]));
         }
-        console.log(this.classifications)
+        for(let i=0;i<this.classifications.length;i++){
+            this.classifications[i].getAverage();
+        }
     }
 }
 class App {
