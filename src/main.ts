@@ -114,14 +114,14 @@ class VectorMath {
         output.mul(1 / vec.length);
         return (output)
     }
-    public static sib(vec1:Vector, vec2:Vector){
+    public static sib(vec1: Vector, vec2: Vector) {
         const output = new Vector(vec1.length);
-        for(let i=0;i<output.length;i++){
-            output.components[i] = vec1.components[i]-vec2.components[i];
+        for (let i = 0; i < output.length; i++) {
+            output.components[i] = vec1.components[i] - vec2.components[i];
         }
-        return(output)
+        return (output)
     }
-    public static normalize(vec:Vector, scale: number = 1) {
+    public static normalize(vec: Vector, scale: number = 1) {
         let magnitude = 0;
         let output = new Vector(vec.length);
         for (let i = 0; i < this.length; i++) {
@@ -146,8 +146,7 @@ class Classification {
     }
     public getAverage() {
         for (let i = 0; i < this.data.length; i++) {
-            console.log(this.data[i])
-
+            console.log(this.data[i]);
         }
     }
     public addData(val: Vector[]) {
@@ -160,12 +159,10 @@ class Classifier {
     classify(val: Vector) {
         let checkDist = Infinity;
         let output = undefined;
-        for (let i = 0; i < this.classifications.length; i++) {
-            this.classifications[i].getAverage();
-            const distance = this.classifications[i].averageVector.distance(val);
-            if (distance < checkDist) {
-                checkDist = distance;
-                output = this.classifications[i]
+        for(let i=0;i<this.classifications.length;i++){
+            const {name, averageVector} = this.classifications[i];
+            for(let i=0;i<averageVector.length;i++){
+                
             }
         }
     }
@@ -181,7 +178,7 @@ class Classifier {
         } else {
             this.classifications.push(new Classification(name, [val]));
         }
-        for(let i=0;i<this.classifications.length;i++){
+        for (let i = 0; i < this.classifications.length; i++) {
             this.classifications[i].getAverage();
         }
     }
