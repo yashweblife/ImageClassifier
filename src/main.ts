@@ -114,6 +114,25 @@ class VectorMath {
         output.mul(1 / vec.length);
         return (output)
     }
+    public static sib(vec1:Vector, vec2:Vector){
+        const output = new Vector(vec1.length);
+        for(let i=0;i<output.length;i++){
+            output.components[i] = vec1.components[i]-vec2.components[i];
+        }
+        return(output)
+    }
+    public static normalize(vec:Vector, scale: number = 1) {
+        let magnitude = 0;
+        let output = new Vector(vec.length);
+        for (let i = 0; i < this.length; i++) {
+            magnitude = vec.components[i] * vec.components[i];
+        }
+        magnitude = Math.sqrt(magnitude);
+        for (let i = 0; i < this.length; i++) {
+            output.components[i] = vec.components[i] * scale / magnitude;
+        }
+        return (vec);
+    }
 }
 
 class Classification {
