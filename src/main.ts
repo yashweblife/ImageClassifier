@@ -1,3 +1,7 @@
+
+/**
+ * Camera
+ */
 class Camera {
     public mediaStream: (MediaStream | null) = null;
     public video: HTMLVideoElement = document.createElement("video")
@@ -33,6 +37,10 @@ class Camera {
         return (this.c.getImageData(0, 0, 300, 300));
     }
 }
+
+/**
+ * Vector
+ */
 class Vector {
     public components: Float64Array;
     public length: number = 0;
@@ -97,6 +105,9 @@ class Vector {
     }
 }
 
+/**
+ * Vector Math
+ */
 class VectorMath {
     constructor() { }
     public static add(v1: Vector, v2: Vector) {
@@ -135,6 +146,9 @@ class VectorMath {
     }
 }
 
+/**
+ * Classification
+ */
 class Classification {
     public averageVector: Vector[] = [];
     constructor(public name: string = "", public data: Vector[][]) {
@@ -153,6 +167,9 @@ class Classification {
         this.data.push(val);
     }
 }
+/**
+ * Classifier
+ */
 class Classifier {
     public classifications: Classification[] = []
     constructor() { }
@@ -183,6 +200,9 @@ class Classifier {
         }
     }
 }
+/**
+ * App
+ */
 class App {
     public time: number = 0;
     public classifier = new Classifier();
