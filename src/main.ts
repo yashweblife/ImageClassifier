@@ -176,10 +176,10 @@ class Classifier {
     classify(val: Vector) {
         let checkDist = Infinity;
         let output = undefined;
-        for(let i=0;i<this.classifications.length;i++){
-            const {name, averageVector} = this.classifications[i];
-            for(let i=0;i<averageVector.length;i++){
-                
+        for (let i = 0; i < this.classifications.length; i++) {
+            const { name, averageVector } = this.classifications[i];
+            for (let i = 0; i < averageVector.length; i++) {
+
             }
         }
     }
