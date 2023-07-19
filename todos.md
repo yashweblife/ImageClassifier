@@ -1,5 +1,5 @@
 # Todos
 
 ## Main
-Create a better system
-Use callback more often
+- Create a better system
+- Use callback more often
