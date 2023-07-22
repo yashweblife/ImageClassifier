@@ -1,6 +1,5 @@
 # Todos
 
-## Main
-- Create a better system
-- Use callback more often
-- 
+- Make a base image classifier
+- Make a super fast Vector Library
+- Create UI
